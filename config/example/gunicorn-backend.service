@@ -3,8 +3,8 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=ubuntu
-Group=ubuntu
+User=pi
+Group=pi
 Environment=PYTHONUNBUFFERED=1
 EnvironmentFile=/home/pi/Development/workshop/flask-backend/config/gunicorn.conf
 WorkingDirectory=/home/pi/Development/workshop/flask-backend/
