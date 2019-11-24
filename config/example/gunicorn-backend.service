@@ -8,7 +8,7 @@ Group=ubuntu
 Environment=PYTHONUNBUFFERED=1
 EnvironmentFile=/home/pi/Development/workshop/flask-backend/config/gunicorn.conf
 WorkingDirectory=/home/pi/Development/workshop/flask-backend/
-ExecStart=/bin/sh -c '${GUNICORN_BIN} --name ${GUNICORN_EVENT_SERVER} --bind ${GUNICORN_EVENT_SERVER_SOCKET} --workers ${GUNICORN_EVENT_SERVER_WORKER_NUM} --worker-class ${GUNICORN_EVENT_SERVER_WORKER_CLASS} --log-level=${GUNICORN_LOG_LEVEL} --timeout=${GUNICORN_TIMEOUT} --access-logfile=${GUNICORN_EVENT_SERVER_ACCESS_LOG_FILE} --error-logfile=${GUNICORN_EVENT_SERVER_ERROR_LOG_FILE} run:app'
+ExecStart=/bin/sh -c '${GUNICORN_BIN} --name ${GUNICORN_SERVER} --bind ${GUNICORN_SERVER_SOCKET} --workers ${GUNICORN_SERVER_WORKER_NUM} --worker-class ${GUNICORN_SERVER_WORKER_CLASS} --log-level=${GUNICORN_LOG_LEVEL} --timeout=${GUNICORN_TIMEOUT} --access-logfile=${GUNICORN_SERVER_ACCESS_LOG_FILE} --error-logfile=${GUNICORN_SERVER_ERROR_LOG_FILE} run:app'
 
 [Install]
 WantedBy=multi-user.target
