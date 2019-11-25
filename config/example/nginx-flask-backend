@@ -1,0 +1,20 @@
+log_format detailed '[$time_local] FROM: $remote_addr, TO: $http_host, REFERRED BY: $http_referer, USING: $http_user_agent, '
+                    'METHOD: $request, STATUS: $status, BODY_BYTES_SENT: $body_bytes_sent';
+
+server {
+    listen   80;
+    server_name 192.168.1.125;
+
+    access_log /home/pi/logs/nginx-app-access.log detailed;
+    error_log /home/pi/logs/nginx-app-error.log debug;
+
+    location ^~/api/ {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host $http_host;
+        # we don't want nginx trying to do something clever with
+        # redirects, we set the Host: header above already.
+        proxy_redirect off;
+        proxy_pass http://localhost:8000/;
+    }
+}
