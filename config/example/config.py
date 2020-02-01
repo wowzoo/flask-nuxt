@@ -1,25 +1,52 @@
-class Config(object):
+import os
+import secrets
+
+# this means ../config
+basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+class BaseConfig(object):
+    SECRET_KEY = secrets.token_urlsafe(16)
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     # Flask Mail
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
-    MAIL_DEFAULT_SENDER = 'hello@knowru.com'
+    MAIL_DEFAULT_SENDER = 'wowzoo@gmail.com'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
 
 
-class DevelopmentConfig(Config):
+class DevelopmentConfig(BaseConfig):
     DEBUG = True
-    BUCKET_NAME = 'alps-dev-s3'
+    TESTING = False
+
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{basedir}/app-dev.db'
 
 
-class ProductionConfig(Config):
+class ProductionConfig(BaseConfig):
     DEBUG = False
-    BUCKET_NAME = 'alps-dev-s3'
+    TESTING = False
+
+    SQLALCHEMY_DATABASE_URI = ''
+
+    # flask-restful's error handler does not throw it's error to
+    # flask's error handler when DEBUG = False
+    # PROPAGATE_EXCEPTIONS = True will resolve this problem
+    PROPAGATE_EXCEPTIONS = True
 
 
-DEVELOPMENT_STAGE = 'development'
+class TestConfig(BaseConfig):
+    DEBUG = True
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{basedir}/app-test.db'
+
 
 app_config = {
     'development': DevelopmentConfig,
-    'production': ProductionConfig
+    'production': ProductionConfig,
+    'test': TestConfig
 }
+
+DEVELOPMENT_STAGE = 'development'

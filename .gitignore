@@ -103,7 +103,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#
+# ETC
 .idea
 .vscode
+.DS_Store
 flask-backend.code-workspace
+config/*.py
