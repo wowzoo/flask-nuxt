@@ -17,6 +17,12 @@ class BaseConfig(object):
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
 
+    # Swagger
+    SWAGGER = {
+        'title': 'Flasgger RESTful',
+        'uiversion': 2
+    }
+
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
