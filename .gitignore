@@ -103,9 +103,13 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# sqlite database file
+*.db
+
 # ETC
 .idea
 .vscode
 .DS_Store
 flask-backend.code-workspace
 config/*.py
+code_test.py

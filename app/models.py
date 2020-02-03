@@ -4,9 +4,12 @@ from app.extensions import db
 
 
 class DifficultyEnum(enum.Enum):
-    easy = 'Easy'
-    medium = 'Medum'
-    hard = 'Hard'
+    easy = 'easy'
+    medium = 'medium'
+    hard = 'hard'
+
+    def __str__(self):
+        return self.value
 
 
 class Recipe(db.Model):
