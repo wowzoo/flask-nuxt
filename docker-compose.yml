@@ -1,0 +1,12 @@
+version: '3'
+services:
+    migration:
+        build: .
+        command: flask db upgrade
+    api:
+        build: .
+        ports:
+            - "5000:5000"
+        depends_on: 
+            - migration
+
