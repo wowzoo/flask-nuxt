@@ -111,5 +111,5 @@ venv.bak/
 .vscode
 .DS_Store
 flask-backend.code-workspace
-config/*.py
+**/config/config.py
 code_test.py
