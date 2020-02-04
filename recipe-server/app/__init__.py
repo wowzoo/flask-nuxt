@@ -5,10 +5,12 @@ from app.extensions import db, ma, migrate, swag
 from app import www, api
 
 
-def create_app(config_name='development') -> Flask:
+def create_app() -> Flask:
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_config[config_name])
+
+    # order matters
     app.config.from_pyfile('sensitive.py')
+    app.config.from_object(app_config[app.config['DEVELOPMENT_STAGE']])
 
     app.url_map.strict_slashes = False
 
