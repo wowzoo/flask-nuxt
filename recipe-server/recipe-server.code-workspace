@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/.idea": true,
+			"**/.pytest_cache": true
+		},
+		"python.pythonPath": "/Users/wowzoo/.pyenv/versions/flask-backend/bin/python",
+		"python.linting.pylintEnabled": false,
+		"python.linting.flake8Enabled": true,
+		"python.linting.enabled": true,
+		"python.linting.pylintUseMinimalCheckers": false
+	}
+}

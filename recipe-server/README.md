@@ -1,5 +1,3 @@
-# flask-backend
-
 ## recipe-server setup
 
 1. copy config/example/config.py to config/config then modify config.py if necessary.

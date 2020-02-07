@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from config.config import app_config
 from app.exceptions import init_error_handlers
 from app.extensions import db, ma, migrate, swag
@@ -24,5 +25,8 @@ def create_app() -> Flask:
 
     # error handler
     init_error_handlers(app)
+
+    # enable CORS
+    CORS(app)
 
     return app
