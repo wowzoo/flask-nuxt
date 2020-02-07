@@ -13,7 +13,6 @@ class BaseConfig(object):
     # Flask Mail
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
-    MAIL_DEFAULT_SENDER = 'wowzoo@gmail.com'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
 
@@ -54,5 +53,3 @@ app_config = {
     'production': ProductionConfig,
     'test': TestConfig
 }
-
-DEVELOPMENT_STAGE = 'development'
