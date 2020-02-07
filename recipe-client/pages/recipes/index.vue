@@ -37,6 +37,9 @@ export default {
   },
   async asyncData({ $axios, params }) {
     try {
+      // this is a short version of
+      // const response = await $axios.get('/recipes')
+      // const recipes = response.data
       const recipes = await $axios.$get('/recipes')
       return { recipes }
     } catch (e) {
@@ -44,8 +47,14 @@ export default {
     }
   },
   methods: {
-    deleteRecipe(recipe) {
-      console.log(`deleted ${recipe.id}`)
+    async deleteRecipe(recipe) {
+      try {
+        await this.$axios.$delete(`/recipes/${recipe.id}`)
+        const newRecipes = await this.$axios.$get('/recipes')
+        this.recipes = newRecipes
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
