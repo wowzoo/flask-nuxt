@@ -10,7 +10,7 @@ recipe_bp = Blueprint('recipe', __name__)
 recipe_api = Api(recipe_bp)
 
 
-class RecipeResource(Resource):
+class RecipeListResource(Resource):
     def get(self):
         """
         List recipes
@@ -25,7 +25,7 @@ class RecipeResource(Resource):
                 examples:
                     []
         """
-        app.logger.info("This is test logging")
+        # app.logger.info("This is test logging")
         recipes_schema = RecipeSchema(many=True)
 
         all_recipes = Recipe.query.all()
@@ -62,9 +62,8 @@ class RecipeResource(Resource):
         """
 
         recipe_schema = RecipeSchema()
-        json_data = request.get_json()
+        json_data = dict(request.form)
         recipe = recipe_schema.load(json_data)
-        app.logger.info(recipe)
 
         db.session.add(recipe)
         db.session.commit()
@@ -72,4 +71,27 @@ class RecipeResource(Resource):
         return recipe_schema.jsonify(recipe)
 
 
-recipe_api.add_resource(RecipeResource, '/recipes')
+class RecipeResource(Resource):
+    recipe_schema = RecipeSchema()
+
+    def get(self, recipe_id):
+        recipe_to_return = Recipe.query.get(recipe_id)
+        return self.recipe_schema.jsonify(recipe_to_return)
+
+    def patch(self, recipe_id):
+        json_data = dict(request.form)
+        recipe_to_update = Recipe.query.filter_by(id=recipe_id).update(json_data)
+        db.session.commit()
+
+        return self.recipe_schema.jsonify(recipe_to_update)
+
+    def delete(self, recipe_id):
+        recipe_to_delete = Recipe.query.get(recipe_id)
+        db.session.delete(recipe_to_delete)
+        db.session.commit()
+
+        return self.recipe_schema.jsonify(recipe_to_delete)
+
+
+recipe_api.add_resource(RecipeListResource, '/recipes')
+recipe_api.add_resource(RecipeResource, '/recipes/<int:recipe_id>')

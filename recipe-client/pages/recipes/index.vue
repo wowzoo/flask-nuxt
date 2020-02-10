@@ -47,9 +47,9 @@ export default {
     }
   },
   methods: {
-    async deleteRecipe(recipe) {
+    async deleteRecipe(recipeID) {
       try {
-        await this.$axios.$delete(`/recipes/${recipe.id}`)
+        await this.$axios.$delete(`/recipes/${recipeID}`)
         const newRecipes = await this.$axios.$get('/recipes')
         this.recipes = newRecipes
       } catch (e) {

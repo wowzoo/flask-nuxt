@@ -14,4 +14,4 @@ class RecipeSchema(ma.ModelSchema):
     class Meta:
         model = Recipe
         # Fields to expose
-        fields = ('name', 'ingredients', 'difficulty', 'prep_time', 'prep_guide')
+        fields = ('id', 'name', 'ingredients', 'difficulty', 'prep_time', 'prep_guide')
