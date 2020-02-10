@@ -17,10 +17,10 @@ services:
         ports:
             - "3000:3000"
     nginx:
-        image: nginx:latest
+        image: nginx:1.17
         container_name: recipe-nginx
         ports:
-            - "80:80"
+            - "8080:8080"
         volumes:
             - ./nginx:/etc/nginx/conf.d
         depends_on:
