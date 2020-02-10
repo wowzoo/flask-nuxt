@@ -1,0 +1,15 @@
+FROM node:12
+
+ADD ./recipe-client /recipe-client
+
+WORKDIR /recipe-client
+
+RUN yarn install
+RUN yarn build
+RUN yarn cache clean
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+EXPOSE $NUXT_PORT
+
+CMD ["yarn", "start"]
