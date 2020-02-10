@@ -4,7 +4,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-server
-        image: recipe-server-api:latest
+        image: recipe-api:latest
+        container_name: recipe-api
         ports:
             - "5000:5000"
     web:
@@ -12,5 +13,15 @@ services:
             context: .
             dockerfile: Dockerfile-client
         image: recipe-web:latest
+        container_name: recipe-web
         ports:
             - "3000:3000"
+    nginx:
+        image: nginx:latest
+        container_name: recipe-nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+        depends_on:
+            - web
